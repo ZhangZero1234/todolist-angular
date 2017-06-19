@@ -1,0 +1,44 @@
+<section class="todoapp" ng-cloak>
+	<header class="header">
+		<h1>todos</h1>
+		<form ng-submit=add()>
+			<input ng-model="text" class="new-todo" placeholder="What needs to be done?" autofocus>
+		</form>
+	</header>
+	<!-- This section should be hidden by default and shown when there are todos -->
+	<section class="main">
+		<input class="toggle-all" type="checkbox">
+		<label for="toggle-all">Mark all as complete</label>
+		<ul class="todo-list">
+			<!-- These are here just to show the structure of the list items -->
+			<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+			<li ng-class="{completed:item.completed}" ng-repeat="item in items">
+				<div class="view">
+					<input class="toggle" type="checkbox" ng-model="item.completed">
+					<label ng-class="{editing:item.completed}">{{item.text}}</label>
+					<button class="destroy" ng-click=destroy(item.id)></button>
+				</div>
+				<input class="edit" value="Create a TodoMVC template">
+			</li>				
+		</ul>
+	</section>
+	<!-- This footer should hidden by default and shown when there are todos -->
+	<footer class="footer">
+		<!-- This should be `0 items left` by default -->
+		<span class="todo-count"><strong>{{items.length}}</strong> item left</span>
+		<!-- Remove this if you don't implement routing -->
+		<ul class="filters">
+			<li>
+				<a  ng-class="{selected:index=='/'}" href="/">All</a>
+			</li>
+			<li>
+				<a ng-class="{selected:index=='/active'}" href="/active">Active</a>
+			</li>
+			<li>
+				<a ng-class="{selected:index==/completed}" href="/completed">Completed</a>
+			</li>
+		</ul>
+		<!-- Hidden if no completed items are left ↓ -->
+		<button class="clear-completed">Clear completed</button>
+	</footer>
+</section>
